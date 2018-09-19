@@ -1,6 +1,11 @@
 <div>
-    <p>Welcome <i class="fa fa-quote-left right"></i><i class="username">{{user}}</i><i class="fa fa-quote-right left"></i> 
-      <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a></p>
+    <div class="alignright">
+        <div class="title"> Welcome<i class="fa fa-quote-left right left"></i><i class="username">{{user}}</i><i class="fa fa-quote-right left"></i> 
+      </div>
+      <div>
+      <div class="logout">
+        <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a>
+      </div>
     <h1>Edit</h1>
     <form [formGroup]="formEdit" (ngSubmit)="onSubmit()">
       <div class="form-group">
