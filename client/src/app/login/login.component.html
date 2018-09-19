@@ -1,6 +1,12 @@
 <div>
     <div class=error >{{error.error}}</div >
-        <h1>Login</h1>
+        <svg viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+            <style>
+              .Rrrrr { font: italic 40px serif; fill: red; }
+            </style>
+          
+            <text x="65" y="55" class="Rrrrr">login!</text>
+          </svg>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
       <label for="username">Username</label>
