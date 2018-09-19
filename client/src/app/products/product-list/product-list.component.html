@@ -1,8 +1,19 @@
 <div>
-  <p>Welcome <i class="fa fa-quote-left right"></i><i>{{user}}</i><i class="fa fa-quote-right left"></i> 
-    <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a></p>
-    
+    <div class=error >{{error.error}}</div >
+
+  <div class="alignright">
+    <div class="title"> Welcome<i class="fa fa-quote-left right left"></i><i class="username">{{user}}</i><i class="fa fa-quote-right left"></i> 
+  </div>
+  <div>
+  <div class="logout">
+    <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a>
+  </div>
+  <div class="alignleft">
     <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-thumbs-up right"></i>Add product</button>
+  </div>
+</div>
+</div>
+
     <h2>Products List</h2>
     <table class="table table-striped">
       <thead>

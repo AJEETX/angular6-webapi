@@ -12,6 +12,7 @@ export class ProductListComponent implements OnInit {
   products:Product[]
   user:string
   loading=false
+  error=''
   constructor(private router:Router, private service:ProductService) {
     this.user=localStorage.getItem('user')
    }
@@ -40,6 +41,10 @@ export class ProductListComponent implements OnInit {
       this.loading=false
 
         this.products = this.products.filter(u => u !== product);
+      },
+      error => {
+          this.error = error;
+          this.loading = false;
       })
   };
 }

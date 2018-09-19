@@ -1,6 +1,6 @@
 <div>
   <div class=error >{{error.error}}</div >
-    <p>Welcome <i class="fa fa-quote-left right"></i><i>{{user}}</i><i class="fa fa-quote-right left"></i> 
+    <p>Welcome <i class="fa fa-quote-left right"></i><i class="username">{{user}}</i><i class="fa fa-quote-right left"></i> 
       <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a></p>
   <h1>Add</h1>
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
@@ -15,6 +15,6 @@
     <button [disabled]="!addForm.valid" class="btn btn-success"><i class="fa fa-floppy-o"></i></button>
     <button class="btn btn-basic" style="margin-left:10px" (click)="back()"><i class="fa fa-repeat"></i></button>
   </div>
-    <div *ngIf="loading"><i class="fa fa-spinner"></i></div>  
+    <div *ngIf="loading"><i class="fa fa-spinner">{{message}}</i></div>
   </form>
 </div>

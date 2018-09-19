@@ -28,7 +28,7 @@ export class AddProductComponent implements OnInit {
 
     this.service.addProduct(this.addForm.value)
     .subscribe(data=>{
-      console.log(data)
+      this.message=data['name'] +'added'
       this.router.navigate([''])
     },
     error => {
