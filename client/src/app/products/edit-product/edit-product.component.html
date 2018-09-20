@@ -9,7 +9,11 @@
     <div class="form-group">
       <input required type="text" id="detail" formControlName="detail" name="detail" class="form-control" placeholder="enter detail" />
     </div>
+    <div class="form-group">
       <button [disabled]="!formEdit.valid" class="btn btn-success"><i class="fa fa-edit right"></i>Update</button>
       <button class="btn btn-basic" style="margin-left:10px"  (click)="back()"><i class="fa fa-repeat"></i></button>
+    </div>
+    <div *ngIf="loading"><i class="fa fa-spinner"></i></div>  
+
     </form>
   </div>

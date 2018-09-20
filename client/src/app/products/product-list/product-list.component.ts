@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class ProductListComponent implements OnInit {
   products:Product[]
   user:string
+  loading=false
   constructor(private router:Router, private service:ProductService) {
     this.user=localStorage.getItem('user')
    }
@@ -21,17 +22,23 @@ export class ProductListComponent implements OnInit {
   })
   }
   addProduct():void{
+    this.loading=true
     this.router.navigate(['add-product'])
   }
   editProduct(product: Product): void {
+    this.loading=true
     console.log(product.id)
     localStorage.removeItem("id");
     localStorage.setItem("id", product.id.toString());
     this.router.navigate(['edit-product']);
   };
   deleteProduct(product: Product): void {
+    this.loading=true
+
     this.service.delete(product.id)
       .subscribe( data => {
+      this.loading=false
+
         this.products = this.products.filter(u => u !== product);
       })
   };

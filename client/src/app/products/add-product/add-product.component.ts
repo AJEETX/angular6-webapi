@@ -8,9 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
-addForm:FormGroup
-user:string
-
+  addForm:FormGroup
+  user:string
+  message:string
+  loading = false;
+  error=''
   constructor(private formBuilder:FormBuilder,private service:ProductService,private router:Router) {
     this.user=localStorage.getItem('user')
    }
@@ -22,10 +24,18 @@ user:string
     })
   }
   onSubmit(){
+    this.loading = true;
+
     this.service.addProduct(this.addForm.value)
     .subscribe(data=>{
+      console.log(data)
       this.router.navigate([''])
-    })
+    },
+    error => {
+        this.error = error;
+        this.loading = false;
+        this.router.navigate(['/login'])
+      })
   }
 back(){
   this.router.navigate([''])

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class EditProductComponent implements OnInit {
 formEdit:FormGroup
 user:string
-
+loading=false
   constructor(private formBuilder:FormBuilder,private service:ProductService,private router:Router) { 
     this.user=localStorage.getItem('user')
   }
@@ -29,6 +29,8 @@ user:string
     })
   }
   onSubmit(){
+    this.loading = true;
+
     this.service.editProduct(this.formEdit.value)
     .subscribe(data=>{
       console.log(data)

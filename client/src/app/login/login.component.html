@@ -21,5 +21,6 @@
   <div class="form-group">
       <button [disabled]="loading || loginForm.invalid" class="btn btn-primary login-button"><i class="fa fa-paper-plane login-button"></i>Login</button> <a [routerLink]="['/register']">Register</a>
       </div>
+      <div *ngIf="loading"><i class="fa fa-spinner"></i></div>
 </form>
 </div>

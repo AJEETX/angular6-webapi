@@ -1,27 +1,29 @@
 <div>
   <p>Welcome <i class="fa fa-quote-left right"></i><i>{{user}}</i><i class="fa fa-quote-right left"></i> 
     <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a></p>
-
-  <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-thumbs-up right"></i>Add product</button>
-  <h2>Products List</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th class="hidden">Id</th>
-        <th>Name</th>
-        <th>detail</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products">
-        <td class="hidden">{{product.id}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.detail}}</td>
-        <td>
-         <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="editProduct(product)"></i>
-          <i class="fa fa-trash-o" (click)="deleteProduct(product)" style="margin-left:10px;"></i>
-        </td>        
-    </tbody>
-  </table>
-</div>
+    
+    <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-thumbs-up right"></i>Add product</button>
+    <h2>Products List</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="hidden">Id</th>
+          <th>Name</th>
+          <th>detail</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td class="hidden">{{product.id}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.detail}}</td>
+          <td>
+            <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="editProduct(product)"></i>
+            <i class="fa fa-trash-o" (click)="deleteProduct(product)" style="margin-left:10px;"></i>
+          </td>        
+        </tbody>
+      </table>
+      <div *ngIf="loading"><i class="fa fa-spinner"></i></div>  
+    </div>
+    
