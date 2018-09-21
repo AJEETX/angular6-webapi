@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+  error=''
   baseUrl:string="http://localhost:5000/users"
   constructor(private http:HttpClient) { }
   login(username:string,password:string){
@@ -17,7 +18,11 @@ export class AuthService {
       }
 
       return user;
-  }));
+  },
+  
+              error => {
+                  this.error = error;
+              }))
   }
   getToken(): string {
     return localStorage.getItem('token');
