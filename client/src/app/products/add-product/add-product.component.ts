@@ -25,7 +25,7 @@ export class AddProductComponent implements OnInit {
   }
   onSubmit(){
     this.loading = true;
-
+console.log(this.addForm.value)
     this.service.addProduct(this.addForm.value)
     .subscribe(data=>{
       this.message=data['name'] +'added'

@@ -38,12 +38,12 @@ public class ProductService : IProductService
         return false;
     }
 
-    public List<Product> Get(string q)
+    public List<Product> Get(string q="")
     {
         var allProduct = _context.Product.AsQueryable();
-        q = q.Trim().ToLowerInvariant();
         if (!string.IsNullOrEmpty(q))
         {
+            q = q.Trim().ToLowerInvariant();
             allProduct = allProduct.Where(m => m.Name.ToLowerInvariant().Contains(q)
                 || m.Detail.ToLowerInvariant().Contains(q));
         }

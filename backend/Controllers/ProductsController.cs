@@ -20,6 +20,8 @@ namespace WebApi.Controllers
         [HttpGet("{q?}")]
         public IActionResult GetProducts(string q = "")
         {
+            if(q=="undefined")
+            q="";
             var products = _productService.Get(q);
             return Ok(products);
 

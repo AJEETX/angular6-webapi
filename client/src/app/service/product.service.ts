@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
 export class ProductService {
 baseUrl:string="http://localhost:5000/products"
   constructor(private http:HttpClient) { }
-getProducts(){
-  return this.http.get<Product[]>(this.baseUrl);
+getProducts(query?:string){
+  return this.http.get<Product[]>(this.baseUrl+ '?q='+query);
 }
 getProductById(id:number){
   return this.http.get<Product>(this.baseUrl+ '/' + id)

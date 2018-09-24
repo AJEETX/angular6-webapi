@@ -10,26 +10,32 @@
   </div>
 
 </div>
-<div class="alignleft">
-    <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-thumbs-up right"></i>Add product</button>
-  </div>
-<hr />    
-<svg viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+
+<svg viewBox="0 0 260 25" xmlns="http://www.w3.org/2000/svg">
   <style>
     .small { font: italic 13px sans-serif; }
-    .heavy { font: bold 30px sans-serif; }
+    .heavy { font: bold 10px sans-serif; }
 
     /* Note that the color of the text is set with the    *
      * fill property, the color property is for HTML only */
-    .Rrrrr { font: italic 40px serif; fill: red; }
+    .Rrrrr { font: italic 15px serif; fill: red; }
   </style>
 
 
-  <text x="40" y="35" class="heavy">products</text>
+  <text x="90" y="10" class="heavy">products</text>
 
-  <text x="65" y="55" class="Rrrrr">list!</text>
+  <text x="135" y="10" class="Rrrrr">list!</text>
 </svg>
-    <table class="table table-striped">
+<hr />    
+<input type="search" class="form-control" placeholder="Please enter search term" [formControl]="searchField">
+<hr/>
+<ul>
+  <li *ngFor="let search of searches">{{ search }}</li>
+</ul>
+<div class="alignleft">
+    <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-thumbs-up right"></i>Add product</button>
+  </div>
+<table class="table table-striped">
       <thead>
         <tr>
           <th class="hidden">Id</th>

@@ -2,6 +2,8 @@ import { ProductService } from '../../service/product.service';
 import { Product } from './../../product';
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import { FormControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
@@ -13,14 +15,30 @@ export class ProductListComponent implements OnInit {
   user:string
   loading=false
   error=''
+  searchField: FormControl
+  searches: string[] = [];
   constructor(private router:Router, private service:ProductService) {
     this.user=localStorage.getItem('user')
+    this.service.getProducts()
+    .subscribe(data=>{
+      this.products=data
+    })
    }
   ngOnInit() {
-  this.service.getProducts()
-  .subscribe(data=>{
-    this.products=data
-  })
+    this.searchField = new FormControl()
+    this.searchField.valueChanges
+    .pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+    )
+    .subscribe(term => {
+      console.log(term)
+      this.service.getProducts(term)
+      .subscribe(data=>{
+        console.log(data)
+        this.products=data
+      })
+    });
   }
   addProduct():void{
     this.loading=true
