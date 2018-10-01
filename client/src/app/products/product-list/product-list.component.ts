@@ -13,11 +13,13 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class ProductListComponent implements OnInit {
   products:Product[]
   user:string
+  admin:boolean
   loading=false
   error=''
   searchField: FormControl
   searches: string[] = [];
   constructor(private router:Router, private service:ProductService) {
+    if(localStorage.getItem('user'))
     this.user=localStorage.getItem('user')
     this.service.getProducts()
     .subscribe(data=>{
@@ -32,10 +34,8 @@ export class ProductListComponent implements OnInit {
       distinctUntilChanged()
     )
     .subscribe(term => {
-      console.log(term)
       this.service.getProducts(term)
       .subscribe(data=>{
-        console.log(data)
         this.products=data
       })
     });
@@ -46,7 +46,6 @@ export class ProductListComponent implements OnInit {
   }
   editProduct(product: Product): void {
     this.loading=true
-    console.log(product.id)
     localStorage.removeItem("id");
     localStorage.setItem("id", product.id.toString());
     this.router.navigate(['edit-product']);
@@ -57,7 +56,6 @@ export class ProductListComponent implements OnInit {
     this.service.delete(product.id)
       .subscribe( data => {
       this.loading=false
-
         this.products = this.products.filter(u => u !== product);
       },
       error => {
@@ -65,4 +63,9 @@ export class ProductListComponent implements OnInit {
           this.loading = false;
       })
   };
+  getUserDetail(){
+    var id=localStorage.getItem('id')
+    console.log('user '+id)
+    this.router.navigate(['/user']);
+  }
 }

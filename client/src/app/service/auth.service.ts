@@ -15,18 +15,26 @@ export class AuthService {
       if (user && user.token) {
           localStorage.setItem('token', user.token);
           localStorage.setItem('user', user.firstName);
+          localStorage.setItem('roles', user.roles);
+          localStorage.setItem('id', user.id);
       }
-
       return user;
   },
-  
-              error => {
-                  this.error = error;
-              }))
+      error => {
+          this.error = error;
+      }))
+  }
+  getUserById(){
+    var id=this.getUserId();
+    var user= this.http.get<User>(this.baseUrl+'/GetUserById/'+id)
+    return user;
   }
   getToken(): string {
     return localStorage.getItem('token');
   }
+  getUserId(): string {
+    return localStorage.getItem('id');
+  }  
   loggedIn(){
     return !!localStorage.getItem('token')
   }

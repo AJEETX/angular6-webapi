@@ -1,22 +1,19 @@
 <div class="top">
-    <div class="alignright">
-        <div class="title"> Welcome<i class="fa fa-quote-left right left"></i><i class="username">{{user}}</i><i class="fa fa-quote-right left"></i> 
-      </div>
-      <div>
-      <div class="logout">
-        <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a>
-      </div>
-      <svg viewBox="0 0 240 30" xmlns="http://www.w3.org/2000/svg">
-        <style>
-          .small { font: italic 13px sans-serif; }
-          .heavy { font: bold 10px sans-serif; }
-      
-          /* Note that the color of the text is set with the    *
-           * fill property, the color property is for HTML only */
-          .Rrrrr { font: italic 15px serif; fill: red; }
-        </style>
-      
-      
+  <div class="alignright">
+    <div > Welcome 
+      <i class="fa fa-quote-left right left"></i>
+      <a class="title"[routerLink]="['/user']"><i class="username">{{user}}</i></a>
+      <i class="fa fa-quote-right left"></i>
+  </div>
+
+  <div class="logout">
+    <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a>
+  </div>
+    <svg viewBox="0 0 260 25" xmlns="http://www.w3.org/2000/svg">
+      <style>
+        .heavy { font: bold 10px sans-serif; }
+        .Rrrrr { font: italic 10px serif; fill: red; text-shadow: 1px 1px 1px grey;}
+      </style>
         <text x="70" y="15" class="heavy">edit</text>
       
         <text x="95" y="15" class="Rrrrr">product!</text>

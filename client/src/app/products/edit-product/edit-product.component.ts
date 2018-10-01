@@ -33,7 +33,6 @@ loading=false
 
     this.service.editProduct(this.formEdit.value)
     .subscribe(data=>{
-      console.log(data)
       this.router.navigate([''])
     })
   }

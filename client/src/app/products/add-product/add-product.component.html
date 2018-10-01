@@ -1,26 +1,25 @@
 <div class="top">
   <div class=error >{{error.error}}</div >
     <div class="alignright">
-        <div class="title"> Welcome<i class="fa fa-quote-left right left"></i><i class="username">{{user}}</i><i class="fa fa-quote-right left"></i> 
-      </div>
-      <div>
-      <div class="logout">
-        <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a>
-      </div>
+      <div > Welcome 
+        <i class="fa fa-quote-left right left"></i>
+        <a class="title"[routerLink]="['/user']"><i class="username">{{user}}</i></a>
+        <i class="fa fa-quote-right left"></i>
+    </div>
+  
+    <div class="logout">
+      <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a>
+    </div>
       <svg viewBox="0 0 260 25" xmlns="http://www.w3.org/2000/svg">
         <style>
-          .small { font: italic 13px sans-serif; }
           .heavy { font: bold 10px sans-serif; }
-      
-          /* Note that the color of the text is set with the    *
-           * fill property, the color property is for HTML only */
-          .Rrrrr { font: italic 13px serif; fill: red; }
+          .Rrrrr { font: italic 10px serif; fill: red; text-shadow: 1px 1px 1px grey;}
         </style>
       
       
-        <text x="80" y="10" class="heavy">add</text>
+        <text x="90" y="10" class="heavy">add</text>
       
-        <text x="105" y="10" class="Rrrrr">product!</text>
+        <text x="115" y="10" class="Rrrrr">product!</text>
       </svg>
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <div class="form-group">

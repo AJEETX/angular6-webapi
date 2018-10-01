@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace WebApi.Model
 {
 public class Product
@@ -11,9 +13,14 @@ public class Product
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public List<Role> Roles {get;set;}
         public string Username { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+    }
+    public class Role{
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
         public class UserDto
     {

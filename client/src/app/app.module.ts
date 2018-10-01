@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './auth/intercept';
+import { UserComponent } from './user/user/user.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AuthInterceptor } from './auth/intercept';
     AddProductComponent,
     RegisterComponent,
     LoginComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

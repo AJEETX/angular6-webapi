@@ -1,0 +1,48 @@
+<div class="top">
+    <!-- <div class=error >{{error.error}}</div > -->
+      <div class="alignright">
+        <div > Welcome 
+          <i class="fa fa-quote-left right left"></i>
+          <a class="title"[routerLink]="['/user']"><i class="username">{{user}}</i></a>
+          <i class="fa fa-quote-right left"></i>
+      </div>
+    
+      <div class="logout">
+        <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a>
+      </div>
+      <svg viewBox="0 0 260 25" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .small { font: italic 13px sans-serif; }
+          .heavy { font: bold 10px sans-serif; }
+          .Rrrrr { font: italic 13px serif; fill: red; }
+        </style>
+      
+      
+        <text x="80" y="10" class="heavy">edit</text>
+      
+        <text x="105" y="10" class="Rrrrr">profile !</text>
+      </svg>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<div class="form-group">
+    <label for="firstname">First name</label>
+    <input type="text" formControlName="firstname" class="form-control" 
+    [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" placeholder="first name"/>
+</div>
+<div class="form-group">
+    <label for="lastname">Last Name</label>
+    <input type="text" formControlName="lastname" class="form-control" 
+    [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" placeholder="last name"/>
+</div>
+<div class="form-group">
+  <label for="username" >Username</label>
+  <input type="text" formControlName="username" class="form-control" 
+  [ngClass]="{ 'disabled': submitted && f.username.errors }" placeholder="username"/>
+</div>
+
+<div class="form-group">
+  <button [disabled]="loading || !userForm.valid" class="btn btn-primary">
+    <i class="fa fa-floppy-o right-margin"></i>Update</button>
+  <a [routerLink]="['']">Cancel</a>
+  </div>
+</form>
+</div>

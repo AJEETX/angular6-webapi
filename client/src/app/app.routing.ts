@@ -5,6 +5,7 @@ import {RouterModule, Routes} from '@angular/router'
 import {ProductListComponent} from './products/product-list/product-list.component'
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user/user.component';
 
 const routes:Routes=[
     {path:'register', component:RegisterComponent},
@@ -12,6 +13,7 @@ const routes:Routes=[
     { path:'', component:ProductListComponent, canActivate: [AuthGuard] },
     { path:'add-product', component:AddProductComponent, canActivate: [AuthGuard]},
     { path:'edit-product', component:EditProductComponent, canActivate: [AuthGuard] },
+    { path:'user', component:UserComponent , canActivate: [AuthGuard] },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

@@ -95,8 +95,9 @@ namespace backend
                 {
                     settings.GeneratorSettings.DefaultPropertyNameHandling = 
                         PropertyNameHandling.CamelCase;
+                    settings.GeneratorSettings.Description="Azy api Description";
+                    settings.GeneratorSettings.Title="Azy Title";
                 });
-            // app.UseHttpsRedirection();
             app.UseAuthentication();
             
             app.UseMvc();

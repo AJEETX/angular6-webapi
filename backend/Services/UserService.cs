@@ -9,8 +9,10 @@ namespace WebApi.Services
 {
     public interface IUserService
     {
-        User Authenticate(string username, string password);
         User Create(User user, string password);
+        User Authenticate(string username, string password);
+        List<User> GetUsers();
+        User GetUserById(int id);
     }
 
     public class UserService : IUserService
@@ -33,6 +35,7 @@ namespace WebApi.Services
                 byte[] passwordHash, passwordSalt;
                 PasswordHasher.CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
+                user.Roles=new List<Role>{new Role{Name= "Admin" }};
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
 
@@ -44,6 +47,11 @@ namespace WebApi.Services
                 //shout/catch/throw/log
             }
             return user;
+        }
+        
+        public User GetUserById(int id)
+        {
+            return _context.Users.Find(id);
         }
         public User Authenticate(string username, string password)
         {
@@ -65,6 +73,11 @@ namespace WebApi.Services
             {
                return null; //shout/catch/throw/log
             }            
+        }
+
+        public List<User> GetUsers()
+        {
+            return _context.Users.ToList();
         }
     }
 }

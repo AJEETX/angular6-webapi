@@ -2,6 +2,8 @@
 .username{
     color:#007bff;
     font-weight: bold;
+    text-decoration: underline;
+    padding: 10px 5px;
 }
 .right{
     margin-right: 5px;
@@ -42,7 +44,8 @@ span{
     margin-bottom: 15px;
 }
 .alignright{
-text-align: right;
+    text-align: right;
+    
 }
 .alignleft{
     text-align: left;
@@ -60,4 +63,7 @@ text-align: right;
     }
     .error{
         color: red;
+    }
+    .title{
+        background-color: white;
     }
