@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-
+import {DisableControlDirective} from '../../DisableControlDirective'
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -14,6 +14,8 @@ userForm:FormGroup
   user:string
   loading = false;
 submitted = false;
+userdisabled=true;
+disableControl:DisableControlDirective
 error = '';
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router,
     private authservice:AuthService) { 

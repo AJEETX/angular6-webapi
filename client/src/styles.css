@@ -67,3 +67,12 @@ span{
     .title{
         background-color: white;
     }
+    .usernamedisabled{
+        height: 40px;
+        background-color: rgb(182, 177, 177);
+        border: 1px solid #ddd;
+        text-align: left;
+        padding: 5px 10px;
+    }
+    .heavy { font: bold 8 sans-serif; }
+    .Rrrrr { font: italic 8 serif; fill: red; text-shadow: 1px 1px 1px grey;}
