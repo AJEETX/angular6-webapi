@@ -11,10 +11,12 @@ import {DisableControlDirective} from '../../DisableControlDirective'
 })
 export class UserComponent implements OnInit {
 userForm:FormGroup
-  user:string
-  loading = false;
+user:string
+loading = false;
 submitted = false;
 userdisabled=true;
+firstname:string
+lastname:string
 disableControl:DisableControlDirective
 error = '';
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router,
@@ -41,5 +43,6 @@ error = '';
     onSubmit() {
       this.submitted = true;
       this.loading = true;
+      this.authservice.update(this.userForm.controls.firstname.value,"")
     }
 }

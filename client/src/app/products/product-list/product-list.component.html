@@ -1,6 +1,5 @@
 <div class="top">
     <div class=error >{{error.error}}</div >
-
       <div class="alignright">
         <div > Welcome 
           <i class="fa fa-quote-left right left"></i>
@@ -11,14 +10,14 @@
       <div class="logout">
         <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a>
       </div>
-        <svg viewBox="0 0 250 22" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 260 25" xmlns="http://www.w3.org/2000/svg">
           <style>
-            .heavy { font: bold 7 sans-serif; }
-            .Rrrrr { font: italic 7 serif; fill: red; text-shadow: 1px 1px 1px grey;}
+            .heavy { font: bold 10px sans-serif; }
+            .Rrrrr { font: italic 10px serif; fill: red; text-shadow: 1px 1px 1px grey;}
           </style>
-  <text x="90" y="10" class="heavy">products</text>
-  <text x="155" y="10" class="Rrrrr">list!</text>
-</svg>
+          <text x="80" y="10" class="heavy">products</text>
+          <text x="125" y="10" class="Rrrrr">list!</text>
+        </svg>
 <input type="search" class="form-control" placeholder="Please enter search term" [formControl]="searchField">
 <ul>
   <li *ngFor="let search of searches">{{ search }}</li>

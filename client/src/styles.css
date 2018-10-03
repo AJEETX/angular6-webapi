@@ -3,7 +3,7 @@
     color:#007bff;
     font-weight: bold;
     text-decoration: underline;
-    padding: 10px 5px;
+    padding: 10px ;
 }
 .right{
     margin-right: 5px;
@@ -69,7 +69,7 @@ span{
     }
     .usernamedisabled{
         height: 40px;
-        background-color: rgb(182, 177, 177);
+        background-color: #eee;
         border: 1px solid #ddd;
         text-align: left;
         padding: 5px 10px;

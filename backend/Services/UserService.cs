@@ -13,6 +13,7 @@ namespace WebApi.Services
         User Authenticate(string username, string password);
         List<User> GetUsers();
         User GetUserById(int id);
+        bool UpdateUser(User user);
     }
 
     public class UserService : IUserService
@@ -78,6 +79,13 @@ namespace WebApi.Services
         public List<User> GetUsers()
         {
             return _context.Users.ToList();
+        }
+
+        public bool UpdateUser(User user)
+        {
+            var update = _context.Users.Update(user);
+            _context.SaveChanges();
+            return update is null ? false : true;
         }
     }
 }

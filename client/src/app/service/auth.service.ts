@@ -41,8 +41,13 @@ export class AuthService {
   logout(){
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+    localStorage.removeItem('roles')
+    localStorage.removeItem('id')
   }
   register(firstname:string,lastname:string, username:string,password:string){
     return this.http.post<any>(this.baseUrl+ '/register',{ firstname,lastname, username, password })
     }
+  update(firstname:string,lastname:string){
+    return this.http.put<any>(this.baseUrl+'/update',{firstname,lastname});
+  }
   }

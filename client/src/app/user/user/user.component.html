@@ -18,9 +18,9 @@
         </style>
       
       
-        <text x="80" y="10" class="heavy">edit</text>
+        <text x="95" y="10" class="heavy">edit</text>
       
-        <text x="105" y="10" class="Rrrrr">profile !</text>
+        <text x="115" y="10" class="Rrrrr">profile !</text>
       </svg>
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
 <div class="form-group">
@@ -36,12 +36,10 @@
 <div class="form-group">
   <label for="username" >Username</label>
   <div class="usernamedisabled">{{user}}</div>
-  <!-- <input  type="text" formControlName="username" class="form-control" 
-   placeholder="username"/> -->
 </div>
 
 <div class="form-group">
-  <button [disabled]="loading || !userForm.valid" class="btn btn-primary">
+  <button [disabled]="loading || !userForm.valid" class="btn btn-primary  right">
     <i class="fa fa-floppy-o right-margin"></i>Update</button>
   <a [routerLink]="['']">Cancel</a>
   </div>

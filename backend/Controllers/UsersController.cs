@@ -83,5 +83,12 @@ namespace WebApi.Controllers
                 return BadRequest(ex.Message);//shout/catch/throw/log
             }
         }
+        [HttpPut("update")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult Update(User user)
+        {
+            return Ok(_userService.UpdateUser(user));
+        }
     }
 }
