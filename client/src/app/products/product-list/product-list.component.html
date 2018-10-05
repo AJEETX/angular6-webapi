@@ -1,9 +1,12 @@
 <div class="top">
     <div class=error >{{error.error}}</div >
       <div class="alignright">
-        <div > Welcome 
+        <div> Welcome 
           <i class="fa fa-quote-left right left"></i>
-          <a class="title"[routerLink]="['/user']"><i class="username">{{user}}</i></a>
+          <a class="title "[routerLink]="['/user']">
+            <i class="fa fa-address-book-o username"></i>
+            {{user}}
+          </a>
           <i class="fa fa-quote-right left"></i>
       </div>
     
@@ -23,7 +26,7 @@
   <li *ngFor="let search of searches">{{ search }}</li>
 </ul>
 <div class="alignleft">
-    <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-thumbs-up right"></i>Add product</button>
+    <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-plus-square right"></i>Add product</button>
   </div>
 <table class="table table-striped">
       <thead>
@@ -40,8 +43,8 @@
           <td>{{product.name}}</td>
           <td>{{product.detail}}</td>
           <td>
-            <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="editProduct(product)"></i>
-            <i class="fa fa-trash-o" (click)="deleteProduct(product)" style="margin-left:10px;"></i>
+            <i class="fa fa-pencil-square-o icon-size-edit" aria-hidden="true" (click)="editProduct(product)"></i>
+            <i class="fa fa-trash-o left icon-size-delete" (click)="deleteProduct(product)" ></i>
           </td>        
         </tbody>
       </table>
