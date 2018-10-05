@@ -12,11 +12,10 @@
     margin-left: 5px;
 }
 .farleft{
-    margin-left: 35px;
     background-color: white;
-    padding: 6px 8px;
+    padding: 6px 3px;
     border-radius: 8px;
-    border:2px outset #fff;
+    border:2px solid #fff;
 }
 .farleft:hover{
     background-color: #007bff;
@@ -39,7 +38,15 @@ td{
 span{
     float: right;
 }
-.logout{
+.welcome{
+    background-color: white;
+    border-radius: 4px;
+}
+.nothing{
+    width: 35%;
+    display: inline-block;
+}
+.log{
     margin-top: 15px;
     margin-bottom: 15px;
 }

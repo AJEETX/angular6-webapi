@@ -1,16 +1,16 @@
 <div class="top">
     <div class=error >{{error.error}}</div >
       <div class="alignright">
-        <div> Welcome 
-          <i class="fa fa-quote-left right left"></i>
-          <a class="title "[routerLink]="['/user']">
-            <i class="fa fa-address-book-o username"></i>
-            {{user}}
-          </a>
-          <i class="fa fa-quote-right left"></i>
-      </div>
-    
-      <div class="logout">
+        <div class="nothing">  
+        </div>
+        <div class="welcome log nothing"> Welcome
+            <i class="fa fa-quote-left right left"></i>
+            <a [routerLink]="['/login']" class="farleft" >
+              {{user}}
+            </a>
+            <i class="fa fa-quote-right left"></i>
+          </div>
+      <div class="log">
         <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a>
       </div>
         <svg viewBox="0 0 260 25" xmlns="http://www.w3.org/2000/svg">
