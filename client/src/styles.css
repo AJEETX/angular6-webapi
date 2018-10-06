@@ -43,12 +43,12 @@ span{
     border-radius: 4px;
 }
 .nothing{
-    width: 35%;
+    padding:3px 10px;
     display: inline-block;
 }
 .log{
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 .alignright{
     text-align: right;
