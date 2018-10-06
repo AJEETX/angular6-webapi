@@ -7,7 +7,7 @@ using WebApi.Services;
 
 namespace WebApi.Controllers
 {
-   [Route("products")]
+    [Route("[controller]")]
     public class ProductsController : Controller
     {
         private IProductService _productService;

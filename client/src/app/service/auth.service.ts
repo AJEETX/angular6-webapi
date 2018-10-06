@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../product';
+import { User, UserInfo } from '../product';
 import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,8 @@ export class AuthService {
     .pipe(map(user => {
       if (user && user.token) {
           localStorage.setItem('token', user.token);
-          localStorage.setItem('user', user.firstName);
+          localStorage.setItem('username', user.username);
+          localStorage.setItem('user', user.firstName+' '+user.lastName);
           localStorage.setItem('roles', user.roles);
           localStorage.setItem('id', user.id);
       }
@@ -26,7 +27,7 @@ export class AuthService {
   }
   getUserById(){
     var id=this.getUserId();
-    var user= this.http.get<User>(this.baseUrl+'/GetUserById/'+id)
+    var user= this.http.get<User>(this.baseUrl+'/'+id)
     return user;
   }
   getToken(): string {
@@ -41,13 +42,16 @@ export class AuthService {
   logout(){
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+    localStorage.removeItem('username')
     localStorage.removeItem('roles')
     localStorage.removeItem('id')
   }
   register(firstname:string,lastname:string, username:string,password:string){
     return this.http.post<any>(this.baseUrl+ '/register',{ firstname,lastname, username, password })
     }
-  update(firstname:string,lastname:string){
-    return this.http.put<any>(this.baseUrl+'/update',{firstname,lastname});
+  update(user:UserInfo){
+    localStorage.removeItem('user')
+    localStorage.setItem('user', user.firstname+' '+user.lastname);
+    return this.http.put(this.baseUrl+'/'+user.Id,user);
   }
-  }
+}

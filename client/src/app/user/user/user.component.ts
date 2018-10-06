@@ -1,3 +1,4 @@
+import { User } from './../../product';
 import { AuthService } from './../../service/auth.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -15,8 +16,7 @@ user:string
 loading = false;
 submitted = false;
 userdisabled=true;
-firstname:string
-lastname:string
+username:string
 disableControl:DisableControlDirective
 error = '';
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router,
@@ -27,8 +27,9 @@ error = '';
         lastname: ['', Validators.required],
         username: ['', Validators.required]
     });
-    if(localStorage.getItem('user'))
+    if(localStorage.getItem('user') && localStorage.getItem('username'))
     this.user=localStorage.getItem('user')
+    this.username=localStorage.getItem('username')
       this.authservice.getUserById()
        .subscribe(data=>{
          this.userForm.setValue(data)
@@ -39,10 +40,14 @@ error = '';
     }
   ngOnInit() {
   }
-    get f() { return this.userForm.controls; }
-    onSubmit() {
-      this.submitted = true;
-      this.loading = true;
-      this.authservice.update(this.userForm.controls.firstname.value,"")
-    }
+  get f() { return this.userForm.controls; }
+  onSubmit() {
+    this.submitted = true;
+    this.loading = true;
+
+    this.authservice.update(this.userForm.value)
+    .subscribe(data=>{
+      this.router.navigate([''])
+    })
+  }
 }

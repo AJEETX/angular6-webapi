@@ -10,3 +10,9 @@ export class User{
     LastName:string
     Token:string 
 }
+export class UserInfo{
+    Id:number
+    username:string
+    firstname:string
+    lastname:string
+}

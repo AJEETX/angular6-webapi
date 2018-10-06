@@ -24,7 +24,7 @@ namespace WebApi.Controllers
             _tokeniser = tokeniser;
         }
 
-        [HttpGet("GetUsers")]
+        [HttpGet("")]
         [ProducesResponseType(200, Type = typeof(List<User>))]
         [ProducesResponseType(404)]
         public IActionResult GetUsers()
@@ -33,14 +33,15 @@ namespace WebApi.Controllers
             if(users==null) return NotFound();
             return Ok(users);
         } 
-        [HttpGet("GetUserById/{id}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(404)]
         public IActionResult GetUserById(int id)
         {
             var userData=_userService.GetUserById(id);
             if(userData==null) return NotFound();
-            return Ok(new {Id=userData.Id,Username=userData.Username ,Firstname=userData.FirstName,Lastname=userData.LastName});
+            return Ok(new {Id=userData.Id,Username=userData.Username ,
+            Firstname=userData.FirstName,Lastname=userData.LastName});
         }        
         [HttpPost("authenticate")]
         [ProducesResponseType(200)]
@@ -83,12 +84,15 @@ namespace WebApi.Controllers
                 return BadRequest(ex.Message);//shout/catch/throw/log
             }
         }
-        [HttpPut("update")]
+        [HttpPut("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public IActionResult Update(User user)
+        public IActionResult PutUser([FromBody] UserInfo userInfo)
         {
-            return Ok(_userService.UpdateUser(user));
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            if(!_userService.UpdateUser(userInfo)) return NotFound();
+            return Ok(new {Status="User updated"});
         }
     }
 }

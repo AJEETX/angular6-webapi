@@ -13,7 +13,7 @@ namespace WebApi.Services
         User Authenticate(string username, string password);
         List<User> GetUsers();
         User GetUserById(int id);
-        bool UpdateUser(User user);
+        bool UpdateUser(UserInfo user);
     }
 
     public class UserService : IUserService
@@ -81,8 +81,11 @@ namespace WebApi.Services
             return _context.Users.ToList();
         }
 
-        public bool UpdateUser(User user)
+        public bool UpdateUser(UserInfo userInfo)
         {
+            var user=GetUserById(userInfo.Id);
+            user.FirstName=userInfo.FirstName;
+            user.LastName=userInfo.LastName;
             var update = _context.Users.Update(user);
             _context.SaveChanges();
             return update is null ? false : true;
