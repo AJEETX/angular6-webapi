@@ -90,6 +90,12 @@ span{
     .icon-size-delete{
         font-size:25px;
     }
+    .watch{
+        float: left;
+    }
     #watch{
         height: 2em;
+    }
+    #danger{
+        color: red;
     }
