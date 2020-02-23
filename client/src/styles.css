@@ -32,7 +32,7 @@ th{
     text-shadow: 1px 1px 1px grey;
 }
 td{
-    background-color: white; 
+    /* background-color: white;  */
     border: 2px outset white;
 }
 span{

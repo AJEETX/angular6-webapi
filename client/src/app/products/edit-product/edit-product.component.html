@@ -23,7 +23,10 @@
       </svg>
     <form [formGroup]="formEdit" (ngSubmit)="onSubmit()">
       <div class="form-group">
-      <input required formControlName="name" type="text" id="name" name="name" class="form-control" placeholder="enter name" />
+      <input required formControlName="name" type="text" id="name" name="name" class="form-control" placeholder="update Vehicle registration number" />
+    </div>
+    <div class="form-group">
+      <input formControlName="name" type="checkbox" id="name" placeholder="is special" name="name" class="form-control"  />
     </div>
     <div class="form-group">
       <input required type="text" id="detail" formControlName="detail" name="detail" class="form-control" placeholder="enter detail" />

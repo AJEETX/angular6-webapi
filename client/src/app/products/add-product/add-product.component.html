@@ -22,14 +22,17 @@
       
         <text x="90" y="10" class="heavy">add</text>
       
-        <text x="115" y="10" class="Rrrrr">product!</text>
+        <text x="115" y="10" class="Rrrrr">vehicle details!</text>
       </svg>
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-    <input formControlName="name" type="text" id="name" placeholder="Product Name" name="name" class="form-control"  />
+    <input formControlName="name" type="text" id="name" placeholder="enter Vehicle registration number" name="name" class="form-control"  />
   </div>
   <div class="form-group">
-    <input type="text" id="detail" formControlName="detail" class="form-control" placeholder="enter details" name="detail"  />
+    <input formControlName="watch" type="checkbox" id="watch" placeholder="is special" name="watch" class="form-control"  />
+  </div>
+  <div class="form-group">
+    <textarea type="text" id="detail" formControlName="detail" class="form-control" placeholder="enter details" name="detail"></textarea>
   </div>
   
   <div class="form-group">

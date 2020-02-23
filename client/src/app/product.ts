@@ -2,6 +2,7 @@ export class Product {
     id:number
     brand:string
     detail:string
+    watch:boolean
 }
 export class User{
     Id:number

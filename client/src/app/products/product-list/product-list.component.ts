@@ -18,6 +18,8 @@ export class ProductListComponent implements OnInit {
   error=''
   searchField: FormControl
   searches: string[] = [];
+  colordanger:'red'
+  colornormal:'black'
   constructor(private router:Router, private service:ProductService) {
     if(localStorage.getItem('user'))
     this.user=localStorage.getItem('user')
@@ -67,5 +69,13 @@ export class ProductListComponent implements OnInit {
     var id=localStorage.getItem('id')
     console.log('user '+id)
     this.router.navigate(['/user']);
+  }
+  setMyStyles(product) {
+    let styles = {
+      'color': product.watch ? 'white' : 'black',
+      'font-weight': product.watch ?'bold':'normal',
+      'background-color':product.watch ?'red':'white'
+    };
+    return styles;
   }
 }

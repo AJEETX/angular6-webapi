@@ -7,6 +7,7 @@ public class Product
     public int ID { get; set; }
     public string Name { get; set; }
     public string Detail { get; set; }
+    public bool Watch { get; set; }
 }
     public class User
     {

@@ -18,7 +18,7 @@
             .heavy { font: bold 10px sans-serif; }
             .Rrrrr { font: italic 10px serif; fill: red; text-shadow: 1px 1px 1px grey;}
           </style>
-          <text x="80" y="10" class="heavy">products</text>
+          <text x="80" y="10" class="heavy">vehicle</text>
           <text x="125" y="10" class="Rrrrr">list!</text>
         </svg>
 <input type="search" class="form-control" placeholder="Please enter search term" [formControl]="searchField">
@@ -31,17 +31,19 @@
 <table class="table table-striped">
       <thead>
         <tr>
-          <th class="hidden">Id</th>
-          <th>Name</th>
-          <th>detail</th>
+          <!-- <th class="hidden">Id</th> -->
+          <th>Vehicle Rego</th>
+          <th>Vehicle Description</th>
+          <th>Watch</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products">
-          <td class="hidden">{{product.id}}</td>
+        <tr *ngFor="let product of products" [ngStyle]="setMyStyles(product)">
+          <!-- <td class="hidden">{{product.id}}</td> -->
           <td>{{product.name}}</td>
           <td>{{product.detail}}</td>
+          <td>{{product.watch}}</td>
           <td>
             <i class="fa fa-pencil-square-o icon-size-edit" aria-hidden="true" (click)="editProduct(product)"></i>
             <i class="fa fa-trash-o left icon-size-delete" (click)="deleteProduct(product)" ></i>
