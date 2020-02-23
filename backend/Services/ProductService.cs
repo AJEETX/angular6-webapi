@@ -23,8 +23,7 @@ public class ProductService : IProductService
     }
     public Product Add(Product product)
     {
-        var time=DateTime.Now.ToString("dd-MMM-yyyy HH:MM");;
-        product.Time=time;
+        product.Time=DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss");
         _context.Product.Add(product);
         _context.SaveChanges();
         return product;

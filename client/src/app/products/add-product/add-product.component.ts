@@ -21,9 +21,10 @@ export class AddProductComponent implements OnInit {
     this.addForm=this.formBuilder.group({
       name:['',Validators.required],
       watch:[false,null],
-      detail:['',Validators.required],
+      detail:[null,null],
       time:[null,null],
-      location:['',null]
+      amountlost:[null,null],
+      location:[null,null]
     })
   }
   onSubmit(){

@@ -5,6 +5,7 @@ export class Product {
     watch:boolean
     time:string
     location:string
+    amountlost:number
 }
 export class User{
     Id:number

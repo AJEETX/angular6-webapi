@@ -90,3 +90,6 @@ span{
     .icon-size-delete{
         font-size:25px;
     }
+    #watch{
+        height: 2em;
+    }

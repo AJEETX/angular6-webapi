@@ -11,6 +11,7 @@ public class Product
     public bool Watch { get; set; }
     public string Time { get; set; }
     public string Location { get; set; }
+    public int? Amountlost { get; set; }
 }
     public class User
     {

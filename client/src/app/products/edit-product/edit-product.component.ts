@@ -22,7 +22,10 @@ loading=false
       id:[],
       name:['',Validators.required],
       watch:[false,null],
-      detail:['',Validators.required]
+      detail:['',Validators.required],
+      time:[null,null],
+      amountlost:[0,null],
+      location:['',null]
     })
     this.service.getProductById(+id)
     .subscribe(data=>{

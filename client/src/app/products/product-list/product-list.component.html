@@ -26,16 +26,17 @@
   <li *ngFor="let search of searches">{{ search }}</li>
 </ul>
 <div class="alignleft">
-    <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-plus-square right"></i>Add product</button>
+    <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-plus-square right"></i>Add vehicle detail</button>
   </div>
 <table class="table table-striped">
       <thead>
         <tr>
           <!-- <th class="hidden">Id</th> -->
-          <th>Vehicle Rego</th>
-          <th>Vehicle Description</th>
+          <th>Rego</th>
           <th>Time</th>
           <th>Location</th>
+          <th>Money Lost</th>
+          <th>Comment</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -43,9 +44,10 @@
         <tr *ngFor="let product of products" [ngStyle]="setMyStyles(product)">
           <!-- <td class="hidden">{{product.id}}</td> -->
           <td>{{product.name}}</td>
-          <td>{{product.detail}}</td>
           <td>{{product.time}}</td>
           <td>{{product.location}}</td>
+          <td>{{product.amountlost}}</td>
+          <td>{{product.detail}}</td>
           <td>
             <i class="fa fa-pencil-square-o icon-size-edit" aria-hidden="true" (click)="editProduct(product)"></i>
             <i class="fa fa-trash-o left icon-size-delete" (click)="deleteProduct(product)" ></i>

@@ -51,7 +51,7 @@ namespace WebApi.Controllers
         [ProducesResponseType(400)]
         public IActionResult PostProduct([FromBody][Required]Product product)
         {
-            if (!ModelState.IsValid || product == null || string.IsNullOrEmpty(product.Name) || string.IsNullOrEmpty(product.Detail) )
+            if (!ModelState.IsValid || product == null || string.IsNullOrEmpty(product.Name) )
             return BadRequest(ModelState);
             _productService.Add(product);
             return Ok(product);
