@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace WebApi.Model
@@ -8,6 +9,8 @@ public class Product
     public string Name { get; set; }
     public string Detail { get; set; }
     public bool Watch { get; set; }
+    public string Time { get; set; }
+    public string Location { get; set; }
 }
     public class User
     {

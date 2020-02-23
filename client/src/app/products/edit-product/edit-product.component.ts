@@ -21,6 +21,7 @@ loading=false
     this.formEdit=this.formBuilder.group({
       id:[],
       name:['',Validators.required],
+      watch:[false,null],
       detail:['',Validators.required]
     })
     this.service.getProductById(+id)

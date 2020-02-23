@@ -38,7 +38,8 @@ export class ProductListComponent implements OnInit {
     .subscribe(term => {
       this.service.getProducts(term)
       .subscribe(data=>{
-        this.products=data
+      console.log(data)
+      this.products=data
       })
     });
   }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DB;
@@ -22,6 +23,8 @@ public class ProductService : IProductService
     }
     public Product Add(Product product)
     {
+        var time=DateTime.Now.ToString("dd-MMM-yyyy HH:MM");;
+        product.Time=time;
         _context.Product.Add(product);
         _context.SaveChanges();
         return product;

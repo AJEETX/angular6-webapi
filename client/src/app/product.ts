@@ -3,6 +3,8 @@ export class Product {
     brand:string
     detail:string
     watch:boolean
+    time:string
+    location:string
 }
 export class User{
     Id:number

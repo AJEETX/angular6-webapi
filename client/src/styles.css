@@ -86,9 +86,7 @@ span{
     .Rrrrr { font: italic 8 serif; fill: red; text-shadow: 1px 1px 1px grey;}
     .icon-size-edit{
         font-size:25px;
-        color: blue;
     }
     .icon-size-delete{
         font-size:25px;
-        color: red;
     }
