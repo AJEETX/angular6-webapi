@@ -25,7 +25,8 @@ export class ProductListComponent implements OnInit {
     this.user=localStorage.getItem('user')
     this.service.getProducts()
     .subscribe(data=>{
-      this.products=data
+        console.log(data)
+        this.products=data
     })
    }
   ngOnInit() {
@@ -38,7 +39,7 @@ export class ProductListComponent implements OnInit {
     .subscribe(term => {
       this.service.getProducts(term)
       .subscribe(data=>{
-      console.log(data)
+        console.log(data)
       this.products=data
       })
     });
