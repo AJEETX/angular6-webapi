@@ -12,6 +12,7 @@ public class Product
     public string Time { get; set; }
     public string Location { get; set; }
     public int? Amountlost { get; set; }
+    public string EventNo { get; set; }
 }
     public class User
     {

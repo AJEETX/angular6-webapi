@@ -24,7 +24,8 @@ export class AddProductComponent implements OnInit {
       detail:[null,null],
       time:[null,null],
       amountlost:[null,null],
-      location:[null,null]
+      location:[null,null],
+      eventno:['',Validators.required]
     })
   }
   onSubmit(){

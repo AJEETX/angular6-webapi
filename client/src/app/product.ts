@@ -6,6 +6,7 @@ export class Product {
     time:string
     location:string
     amountlost:number
+    eventno:string
 }
 export class User{
     Id:number
