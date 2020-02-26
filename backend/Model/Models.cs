@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace WebApi.Model
 {
 public class Product
 {
+    [BsonId]
     public int ID { get; set; }
     public string Name { get; set; }
     public string Detail { get; set; }
@@ -16,6 +18,7 @@ public class Product
 }
     public class User
     {
+        [BsonId]
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -25,22 +28,31 @@ public class Product
         public byte[] PasswordSalt { get; set; }
     }
     public class Role{
+        [BsonId]
         public int Id { get; set; }
         public string Name { get; set; }
     }
-        public class UserDto
+    public class UserDto
     {
+        [BsonId]
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
     }
-        public class UserInfo
+    public class UserInfo
     {
+        [BsonId]
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
     }    
+
+    public class Settings
+    {
+        public string ConnectionString;
+        public string Database;
+    }
 }

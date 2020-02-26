@@ -12,6 +12,7 @@
     <PackageReference Include="automapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.Dependencyinjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
     <PackageReference Include="NSwag.AspNetCore" Version="11.19.1" />
   </ItemGroup>
 
