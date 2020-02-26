@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   error=''
-  baseUrl:string="https://localhost:5001/users"
+  baseUrl:string="http://localhost:5000/users"
   constructor(private http:HttpClient) { }
   login(username:string,password:string){
     return this.http.post<any>(this.baseUrl+ '/authenticate',{ username, password })

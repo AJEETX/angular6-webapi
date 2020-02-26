@@ -16,25 +16,26 @@ namespace WebApi.Controllers
         {
             _productService = productService;
         }
-        [Authorize(Roles = "Admin,User")]   
+        [Authorize(Roles = "Admin,User")]
 
         [HttpGet("{q?}")]
         public IActionResult GetProducts(string q = "")
         {
-            if(q=="undefined")
-            q="";
-            var claims=User.Claims.Select(x=>
-            new {
-                Type=x.Type,
-                Value=x.Value
+            if (q == "undefined")
+                q = "";
+            var claims = User.Claims.Select(x =>
+              new
+              {
+                  Type = x.Type,
+                  Value = x.Value
 
-            });
+              });
             var products = _productService.Get(q);
             return Ok(products);
 
         }
 
-        [Authorize(Roles = "Admin,User")]   
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(Product))]
         [ProducesResponseType(404)]
@@ -51,8 +52,8 @@ namespace WebApi.Controllers
         [ProducesResponseType(400)]
         public IActionResult PostProduct([FromBody][Required]Product product)
         {
-            if (!ModelState.IsValid || product == null || string.IsNullOrEmpty(product.Name) )
-            return BadRequest(ModelState);
+            if (!ModelState.IsValid || product == null || string.IsNullOrEmpty(product.Name))
+                return BadRequest(ModelState);
             _productService.Add(product);
             return Ok(product);
         }
@@ -63,14 +64,14 @@ namespace WebApi.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
             product.ID = id;
             if (!_productService.Update(product)) return NotFound();
-            return Ok(new {Status="Product updated"});
+            return Ok(new { Status = "Product updated" });
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
             if (!_productService.Delete(id)) return BadRequest();
-            return Ok(new {Status= "Product deleted"});
+            return Ok(new { Status = "Product deleted" });
         }
     }
 }

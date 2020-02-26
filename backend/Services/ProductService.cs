@@ -1,68 +1,96 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using DB;
+using WebApi.Helpers;
 using WebApi.Model;
+using System.Linq;
+using System.Collections.Generic;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
-namespace  WebApi.Services
+namespace WebApi.Services
 {
-public interface IProductService 
-{
-    List<Product> Get(string q);
-    Product GetById(int id);
-    Product Add(Product product);
-    bool Update(Product product);
-    bool Delete(int id);
-}
-public class ProductService : IProductService
-{
-    readonly DataContext _context;
-    public ProductService(DataContext context)
+    public interface IProductService
     {
-        _context=context;
+        List<Product> Get(string q);
+        Product GetById(int id);
+        Product Add(Product product);
+        bool Update(Product product);
+        bool Delete(int id);
     }
-    public Product Add(Product product)
+    public class ProductService : IProductService
     {
-        product.Time=DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss");
-        _context.Product.Add(product);
-        _context.SaveChanges();
-        return product;
-    }
-
-    public bool Delete(int id)
-    {
-        var product = _context.Product.Find(id);
-        if (product != null)
+        readonly DataContext _context;
+        public ProductService(IOptions<Settings> settings)
         {
-            _context.Product.Remove(product);
-            return _context.SaveChanges()!=0?true:false;
+            _context = new DataContext(settings);
         }
-        return false;
-    }
-
-    public List<Product> Get(string q="")
-    {
-        var allProduct = _context.Product.AsQueryable();
-        if (!string.IsNullOrEmpty(q))
+        public Product Add(Product product)
         {
-            q = q.Trim().ToLowerInvariant();
-            allProduct = allProduct.Where(m => m.Name.ToLowerInvariant().Contains(q)
-                || m.Detail.ToLowerInvariant().Contains(q));
+            product.Time = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss");
+            _context.Products.InsertOne(product);
+            return product;
         }
 
-        return allProduct.ToList();
-    }
+        public List<Product> Get(string q = "")
+        {
+            try
+            {
+                return _context.Products.Find(u => u.Name.Contains(q))?.ToList();
+            }
+            catch (Exception)
+            {
 
-    public Product GetById(int id)
-    {
-        return _context.Product.Find(id);
-    }
+                throw;
+            }
+        }
 
-    public bool Update(Product product)
-    {
-        var update = _context.Product.Update(product);
-        _context.SaveChanges();
-        return update is null ? false : true;
+        public Product GetById(int id)
+        {
+            try
+            {
+                return _context.Products.Find(u => u.ID == id)?.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool Update(Product productInfo)
+        {
+            try
+            {
+                var product = GetById(productInfo.ID);
+
+                ReplaceOneResult actionResult = _context.Products
+                                                .ReplaceOne(n => n.ID.Equals(productInfo.ID)
+                                                                , product
+                                                                , new ReplaceOptions { IsUpsert = true });
+                return actionResult.IsAcknowledged
+                    && actionResult.ModifiedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                // log or manage the exception
+                throw ex;
+            }
+        }
+        public bool Delete(int id)
+        {
+            try
+            {
+                DeleteResult actionResult = _context.Products.DeleteOne(
+                     Builders<Product>.Filter.Eq("Id", id));
+
+                return actionResult.IsAcknowledged
+                    && actionResult.DeletedCount > 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
-}
 }

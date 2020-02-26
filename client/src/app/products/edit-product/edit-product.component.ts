@@ -26,7 +26,7 @@ loading=false
       time:[null,null],
       amountlost:[null,null],
       location:[null,null],
-      eventno:['',Validators.required]
+      eventNo:['',Validators.required]
     })
     this.service.getProductById(+id)
     .subscribe(data=>{

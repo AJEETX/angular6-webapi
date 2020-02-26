@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DB;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using WebApi.Helpers;
 using WebApi.Model;
 
@@ -18,18 +19,18 @@ namespace WebApi.Services
 
     public class UserService : IUserService
     {
-        private DB.DataContext _context;
+        private DataContext _context;
 
-        public UserService(DB.DataContext context)
+        public UserService(IOptions<Settings> settings)
         {
-            _context = context;
+            _context = new DataContext(settings);
         }
         public User Create(User user, string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 throw new AppException("Password is required");
 
-            if (_context.Users.Any(u => u.Username == user.Username))
+            if (_context.Users.Find(u => u.Username == user.Username).FirstOrDefault()!=null)
                 throw new AppException("Username '" + user.Username + "' is already taken");
             try
             {    
@@ -40,8 +41,7 @@ namespace WebApi.Services
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
 
-                _context.Users.Add(user);
-                _context.SaveChanges();
+                _context.Users.InsertOne(user);
             }
             catch (AppException)
             {
@@ -52,7 +52,7 @@ namespace WebApi.Services
         
         public User GetUserById(int id)
         {
-            return _context.Users.Find(id);
+            return _context.Users.Find(u=>u.Id==id)?.FirstOrDefault();
         }
         public User Authenticate(string username, string password)
         {
@@ -61,7 +61,7 @@ namespace WebApi.Services
             try
             {    
             
-                var user = _context.Users.SingleOrDefault(x => x.Username == username);
+                var user = _context.Users.Find(x => x.Username == username).FirstOrDefault();
 
                 if (user == null)
                     return null;
@@ -78,7 +78,7 @@ namespace WebApi.Services
 
         public List<User> GetUsers()
         {
-            return _context.Users.ToList();
+            return _context.Users.Find(_=>true).ToList();
         }
 
         public bool UpdateUser(UserInfo userInfo)
@@ -86,9 +86,14 @@ namespace WebApi.Services
             var user=GetUserById(userInfo.Id);
             user.FirstName=userInfo.FirstName;
             user.LastName=userInfo.LastName;
-            var update = _context.Users.Update(user);
-            _context.SaveChanges();
-            return update is null ? false : true;
+            var filter = Builders<User>.Filter.Eq(s => s.Id, userInfo.Id);
+
+            var update = Builders<User>.Update
+                            .Set(s => s.FirstName, userInfo.FirstName)
+                            .Set(s=>s.LastName,userInfo.LastName);
+
+            var updateResult = _context.Users.UpdateOne(filter,update);
+            return updateResult.IsAcknowledged && updateResult.MatchedCount>0;
         }
     }
 }
