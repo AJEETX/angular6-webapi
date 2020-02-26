@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductService {
-baseUrl:string="http://localhost:5000/products"
+baseUrl:string="https://localhost:5001/products"
   constructor(private http:HttpClient) { }
 getProducts(query?:string){
   return this.http.get<Product[]>(this.baseUrl+ '?q='+query);

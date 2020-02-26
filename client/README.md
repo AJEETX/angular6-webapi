@@ -26,4 +26,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-## --ssl --ssl-key d\":\"\"certificates\"\"localhost.key  --ssl-cert d\":\"\"certificates\"\"certificate.crt
+## To-Do  
+
+    setup certificate for https
+    --ssl --ssl-key d\":\"\"certificates\"\"localhost.key  --ssl-cert d\":\"\"certificates\"\"certificate.crt
+
