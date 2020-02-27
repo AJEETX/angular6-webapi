@@ -5,16 +5,17 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace WebApi.Services
 {
     public interface IProductService
     {
         List<Product> Get(string q);
-        Product GetById(int id);
+        Product GetById(string id);
         Product Add(Product product);
         bool Update(Product product);
-        bool Delete(int id);
+        bool Delete(string id);
     }
     public class ProductService : IProductService
     {
@@ -32,65 +33,65 @@ namespace WebApi.Services
 
         public List<Product> Get(string q = "")
         {
+            var products=default(List<Product>);
             try
             {
-                return _context.Products.Find(u => u.Name.Contains(q))?.ToList();
+                products= _context.Products.Find(u => u.Name.Contains(q))?.ToList();
             }
             catch (Exception)
             {
-
-                throw;
+                // log or manage the exception
             }
+            return products;
         }
 
-        public Product GetById(int id)
+        public Product GetById(string id)
         {
+            var product=default(Product);
             try
             {
-                return _context.Products.Find(u => u.ID == id)?.FirstOrDefault();
+                product= _context.Products.Find(p => p.ID == GetInternalId(id) || p.Id==id )?.FirstOrDefault();
             }
             catch (Exception)
             {
-
-                throw;
+                // log or manage the exception
             }
+            return product;
         }
+        // Try to convert the Id to a BSonId value
+        private ObjectId GetInternalId(string id)
+        {
+            if (!ObjectId.TryParse(id, out ObjectId internalId))
+                internalId = ObjectId.Empty;
 
+            return internalId;
+        }
         public bool Update(Product productInfo)
         {
             try
             {
-                var product = GetById(productInfo.ID);
-
-                ReplaceOneResult actionResult = _context.Products
-                                                .ReplaceOne(n => n.ID.Equals(productInfo.ID)
-                                                                , product
-                                                                , new ReplaceOptions { IsUpsert = true });
-                return actionResult.IsAcknowledged
-                    && actionResult.ModifiedCount > 0;
-            }
-            catch (Exception ex)
-            {
-                // log or manage the exception
-                throw ex;
-            }
-        }
-        public bool Delete(int id)
-        {
-            try
-            {
-                DeleteResult actionResult = _context.Products.DeleteOne(
-                     Builders<Product>.Filter.Eq("Id", id));
-
-                return actionResult.IsAcknowledged
-                    && actionResult.DeletedCount > 0;
+                var updateResult = _context.Products.ReplaceOne(n => n.ID.Equals(productInfo.ID), productInfo, new ReplaceOptions { IsUpsert = true });
+                return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
             }
             catch (Exception)
             {
-
-                throw;
+                // log or manage the exception
+                return false;
             }
+        }
+        public bool Delete(string id)
+        {
+            try
+            {
+                DeleteResult actionResult = _context.Products.DeleteOne(Builders<Product>.Filter.Eq("Id", id));
 
+                return actionResult.IsAcknowledged && actionResult.DeletedCount > 0;
+            }
+            catch (Exception)
+            {
+                // log or manage the exception
+                return false;
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoMapper;
 using WebApi.Model;
 
@@ -10,6 +11,8 @@ namespace WebApi.Helpers
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
             CreateMap<UserInfo, User>();
+            CreateMap<Product,ProductDto>();
+            CreateMap<ProductDto,Product>();
         }
     }
 }

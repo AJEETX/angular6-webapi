@@ -27,6 +27,7 @@ export class AuthService {
   }
   getUserById(){
     var id=this.getUserId();
+    console.log(id)
     var user= this.http.get<User>(this.baseUrl+'/'+id)
     return user;
   }

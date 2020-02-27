@@ -31,16 +31,17 @@ namespace WebApi.Controllers
         {
             var users=_userService.GetUsers();
             if(users==null) return NotFound();
-            return Ok(users);
+            var userDtos=_mapper.Map<List<UserDto>>(users);
+            return Ok(userDtos);
         } 
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(404)]
-        public IActionResult GetUserById(int id)
+        public IActionResult GetUserById(string id)
         {
             var userData=_userService.GetUserById(id);
             if(userData==null) return NotFound();
-            return Ok(new {Id=userData.Id,Username=userData.Username ,
+            return Ok(new {Id=userData.ID,Username=userData.Username ,
             Firstname=userData.FirstName,Lastname=userData.LastName});
         }        
         [HttpPost("authenticate")]
@@ -55,9 +56,9 @@ namespace WebApi.Controllers
                 if (user == null)
                     return BadRequest("Username or password is incorrect");
                 var u=userDto.Username;
-                var Token = _tokeniser.CreateToken(user.Id.ToString(),u);
+                var Token = _tokeniser.CreateToken(user.ID.ToString(),u);
 
-                return Ok(new { user.Id, user.Username
+                return Ok(new { user.ID, user.Username
                 ,user.Roles
                 , user.FirstName, user.LastName, Token });
             }
@@ -89,9 +90,10 @@ namespace WebApi.Controllers
         [ProducesResponseType(400)]
         public IActionResult PutUser([FromBody] UserInfo userInfo)
         {
+            var user = _mapper.Map<User>(userInfo);
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if(!_userService.UpdateUser(userInfo)) return NotFound();
+            if(!_userService.UpdateUser(user)) return NotFound();
             return Ok(new {Status="User updated"});
         }
     }

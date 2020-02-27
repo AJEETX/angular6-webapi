@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Model;
@@ -11,10 +12,12 @@ namespace WebApi.Controllers
     public class ProductsController : Controller
     {
         private IProductService _productService;
+        private IMapper _mapper;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
         [Authorize(Roles = "Admin,User")]
 
@@ -39,7 +42,7 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(Product))]
         [ProducesResponseType(404)]
-        public IActionResult GetProduct(int id)
+        public IActionResult GetProduct(string id)
         {
             var product = _productService.GetById(id);
             if (product == null) return NotFound();
@@ -50,25 +53,27 @@ namespace WebApi.Controllers
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(Product))]
         [ProducesResponseType(400)]
-        public IActionResult PostProduct([FromBody][Required]Product product)
+        public IActionResult PostProduct([FromBody][Required]ProductDto productDto)
         {
-            if (!ModelState.IsValid || product == null || string.IsNullOrEmpty(product.Name))
+            if (!ModelState.IsValid || productDto == null || string.IsNullOrEmpty(productDto.Name))
                 return BadRequest(ModelState);
+            var product=_mapper.Map<Product>(productDto);
             _productService.Add(product);
             return Ok(product);
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutProduct(int id, [FromBody]Product product)
+        public IActionResult PutProduct(string id, [FromBody]ProductDto productDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            product.ID = id;
+            var product=_mapper.Map<Product>(productDto);
+
             if (!_productService.Update(product)) return NotFound();
             return Ok(new { Status = "Product updated" });
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteProduct(int id)
+        public IActionResult DeleteProduct(string id)
         {
             if (!_productService.Delete(id)) return BadRequest();
             return Ok(new { Status = "Product deleted" });

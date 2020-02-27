@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using WebApi.Helpers;
 using WebApi.Model;
@@ -13,8 +13,8 @@ namespace WebApi.Services
         User Create(User user, string password);
         User Authenticate(string username, string password);
         List<User> GetUsers();
-        User GetUserById(int id);
-        bool UpdateUser(UserInfo user);
+        User GetUserById(string id);
+        bool UpdateUser(User user);
     }
 
     public class UserService : IUserService
@@ -50,9 +50,18 @@ namespace WebApi.Services
             return user;
         }
         
-        public User GetUserById(int id)
+        public User GetUserById(string id)
         {
-            return _context.Users.Find(u=>u.Id==id)?.FirstOrDefault();
+            var user=default(User);
+            if(string.IsNullOrWhiteSpace(id)) return user;
+            try{
+                user= _context.Users.Find(u=>u.ID==GetInternalId(id) || u.Id==id )?.FirstOrDefault();
+            }
+            catch (AppException)
+            {
+                //shout/catch/throw/log
+            }        
+            return user;    
         }
         public User Authenticate(string username, string password)
         {
@@ -78,22 +87,35 @@ namespace WebApi.Services
 
         public List<User> GetUsers()
         {
-            return _context.Users.Find(_=>true).ToList();
+            try{
+                return _context.Users.Find(_=>true).ToList();
+            }
+            catch (AppException)
+            {
+               return null; //shout/catch/throw/log
+            }               
         }
 
-        public bool UpdateUser(UserInfo userInfo)
+        public bool UpdateUser(User user)
         {
-            var user=GetUserById(userInfo.Id);
-            user.FirstName=userInfo.FirstName;
-            user.LastName=userInfo.LastName;
-            var filter = Builders<User>.Filter.Eq(s => s.Id, userInfo.Id);
+            try{
+                var filter = Builders<User>.Filter.Eq(s => s.ID, user.ID);
+                var update = Builders<User>.Update.Set(s => s.FirstName, user.FirstName).Set(s => s.LastName, user.LastName);            
+                var updateResult = _context.Users.UpdateOne(filter,update);
+                return updateResult.IsAcknowledged && updateResult.MatchedCount>0;                
+            }
+            catch (AppException)
+            {
+               return false; //shout/catch/throw/log
+            }               
+        }
+                // Try to convert the Id to a BSonId value
+        private ObjectId GetInternalId(string id)
+        {
+            if (!ObjectId.TryParse(id, out ObjectId internalId))
+                internalId = ObjectId.Empty;
 
-            var update = Builders<User>.Update
-                            .Set(s => s.FirstName, userInfo.FirstName)
-                            .Set(s=>s.LastName,userInfo.LastName);
-
-            var updateResult = _context.Users.UpdateOne(filter,update);
-            return updateResult.IsAcknowledged && updateResult.MatchedCount>0;
+            return internalId;
         }
     }
 }
