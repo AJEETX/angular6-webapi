@@ -50,7 +50,7 @@ namespace WebApi.Services
             var product=default(Product);
             try
             {
-                product= _context.Products.Find(p => p.ID == GetInternalId(id) || p.Id==id )?.FirstOrDefault();
+                product= _context.Products.Find(p => p.ID == GetInternalId(id) || p.PId==id )?.FirstOrDefault();
             }
             catch (Exception)
             {
