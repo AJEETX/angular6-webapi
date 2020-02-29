@@ -40,7 +40,7 @@ export class ProductListComponent implements OnInit {
       this.service.getProducts(term)
       .subscribe(data=>{
         console.log(data)
-      this.products=data
+        this.products=data
       })
     });
   }
@@ -51,13 +51,14 @@ export class ProductListComponent implements OnInit {
   editProduct(product: Product): void {
     this.loading=true
     localStorage.removeItem("id");
-    localStorage.setItem("id", product.id.toString());
+    localStorage.setItem("id", product.pId.toString());
+    console.log( 'edit '+product)
     this.router.navigate(['edit-product']);
   };
   deleteProduct(product: Product): void {
     this.loading=true
 
-    this.service.delete(product.id)
+    this.service.delete(product.pId)
       .subscribe( data => {
       this.loading=false
         this.products = this.products.filter(u => u !== product);

@@ -43,7 +43,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of products" [ngStyle]="setMyStyles(product)">
-          <!-- <td class="hidden">{{product.id}}</td> -->
+          <td style="display:none">{{product.pId}}</td>
           <td>{{product.name}}</td>
           <!-- <td>{{product.time}}</td> -->
           <td>{{product.location}}</td>

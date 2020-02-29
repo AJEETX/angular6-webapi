@@ -24,25 +24,17 @@ namespace WebApi.Controllers
         [HttpGet("{q?}")]
         public IActionResult GetProducts(string q = "")
         {
-            if (q == "undefined")
-                q = "";
-            var claims = User.Claims.Select(x =>
-              new
-              {
-                  Type = x.Type,
-                  Value = x.Value
-
-              });
+            if (q == "undefined")  q = "";
+            var claims = User.Claims.Select(x => new {Type = x.Type, Value = x.Value});
             var products = _productService.Get(q);
             return Ok(products);
-
         }
 
         [Authorize(Roles = "Admin,User")]
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(Product))]
         [ProducesResponseType(404)]
-        public IActionResult GetProduct(string id)
+        public IActionResult GetProduct(long id)
         {
             var product = _productService.GetById(id);
             if (product == null) return NotFound();
@@ -59,7 +51,7 @@ namespace WebApi.Controllers
                 return BadRequest(ModelState);
             var product=_mapper.Map<Product>(productDto);
             _productService.Add(product);
-            return Ok(product);
+            return Ok(new {Product=product,StatusCode="Vehicle added"});
         }
 
         [HttpPut("{id}")]
@@ -69,14 +61,14 @@ namespace WebApi.Controllers
             var product=_mapper.Map<Product>(productDto);
 
             if (!_productService.Update(product)) return NotFound();
-            return Ok(new { Status = "Product updated" });
+            return Ok(new { Status = "Vehicle updated" });
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteProduct(string id)
+        public IActionResult DeleteProduct(long id)
         {
             if (!_productService.Delete(id)) return BadRequest();
-            return Ok(new { Status = "Product deleted" });
+            return Ok(new { Status = "Vehicle deleted" });
         }
     }
 }

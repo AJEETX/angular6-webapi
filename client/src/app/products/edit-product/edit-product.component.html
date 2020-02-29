@@ -23,6 +23,9 @@
       </svg>
     <form [formGroup]="formEdit" (ngSubmit)="onSubmit()">
       <div class="form-group">
+        <input hidden formControlName="pId" type="text" id="pId" name="pId" class="form-control" />
+      </div>
+      <div class="form-group">
       <input required formControlName="name" type="text" id="name" name="name" class="form-control" placeholder="update Vehicle registration number" />
     </div>
     <div class="form-group">

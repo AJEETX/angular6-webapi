@@ -1,5 +1,6 @@
 export class Product {
-    id:number
+    id:string
+    pId:number
     brand:string
     detail:string
     watch:boolean

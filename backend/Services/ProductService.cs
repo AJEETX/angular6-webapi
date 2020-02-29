@@ -12,14 +12,15 @@ namespace WebApi.Services
     public interface IProductService
     {
         List<Product> Get(string q);
-        Product GetById(string id);
+        Product GetById(long id);
         Product Add(Product product);
         bool Update(Product product);
-        bool Delete(string id);
+        bool Delete(long id);
     }
     public class ProductService : IProductService
     {
         readonly DataContext _context;
+        Random random=new Random();
         public ProductService(IOptions<Settings> settings)
         {
             _context = new DataContext(settings);
@@ -27,6 +28,7 @@ namespace WebApi.Services
         public Product Add(Product product)
         {
             product.Time = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss");
+            product.PId=random.Next();
             _context.Products.InsertOne(product);
             return product;
         }
@@ -36,7 +38,7 @@ namespace WebApi.Services
             var products=default(List<Product>);
             try
             {
-                products= _context.Products.Find(u => u.Name.Contains(q))?.ToList();
+                products= _context.Products.Find(u => u.Name.Contains(q) || u.Location.Contains(q) || u.EventNo.Contains(q) )?.ToList();
             }
             catch (Exception)
             {
@@ -45,12 +47,12 @@ namespace WebApi.Services
             return products;
         }
 
-        public Product GetById(string id)
+        public Product GetById(long id)
         {
             var product=default(Product);
             try
             {
-                product= _context.Products.Find(p => p.ID == GetInternalId(id) || p.PId==id )?.FirstOrDefault();
+                product= _context.Products.Find(p => p.PId == id)?.FirstOrDefault();
             }
             catch (Exception)
             {
@@ -79,11 +81,11 @@ namespace WebApi.Services
                 return false;
             }
         }
-        public bool Delete(string id)
+        public bool Delete(long id)
         {
             try
             {
-                DeleteResult actionResult = _context.Products.DeleteOne(Builders<Product>.Filter.Eq("Id", id));
+                DeleteResult actionResult = _context.Products.DeleteOne(Builders<Product>.Filter.Eq("PId", id));
 
                 return actionResult.IsAcknowledged && actionResult.DeletedCount > 0;
             }

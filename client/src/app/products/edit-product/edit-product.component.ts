@@ -15,11 +15,11 @@ loading=false
   constructor(private formBuilder:FormBuilder,private service:ProductService,private router:Router) { 
     this.user=localStorage.getItem('user')
   }
-
   ngOnInit() {
-    let id=localStorage.getItem('id')
+    let pId= localStorage.getItem('id')
     this.formEdit=this.formBuilder.group({
-      id:[],
+      pId:pId,
+      id:[null,null],
       name:['',Validators.required],
       watch:[false,null],
       detail:[null,null],
@@ -28,7 +28,8 @@ loading=false
       location:[null,null],
       eventNo:['',Validators.required]
     })
-    this.service.getProductById(+id)
+    console.log(pId)
+    this.service.getProductById(parseInt(pId))
     .subscribe(data=>{
       this.formEdit.setValue(data)
     })
