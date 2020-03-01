@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-     "start": "ng serve --port 5050 -o --ssl --ssl-key d\":\\\\certificates\\\\localhost.key  --ssl-cert d\":\\\\certificates\\\\certificate.crt",
+    "start": "ng serve --port 5050 -o --ssl --ssl-key d\":\\\\certificates\\\\localhost.key  --ssl-cert d\":\\\\certificates\\\\certificate.crt",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -43,6 +43,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~2.9.2"
+    "typescript": "^2.9.2"
   }
 }
