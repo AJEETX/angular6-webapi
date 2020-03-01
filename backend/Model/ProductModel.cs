@@ -1,3 +1,4 @@
+using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -16,6 +17,7 @@ namespace WebApi.Model
         public string Location { get; set; }
         public int? Amountlost { get; set; }
         public string EventNo { get; set; }
+        public DateTime Date { get; set; }
     }
     public class ProductDto
     {
@@ -27,5 +29,6 @@ namespace WebApi.Model
         public string Location { get; set; }
         public int? Amountlost { get; set; }
         public string EventNo { get; set; }
+        public DateTime Date { get; set; }
     }    
 }

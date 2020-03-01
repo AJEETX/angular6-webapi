@@ -26,7 +26,8 @@ loading=false
       time:[null,null],
       amountlost:[null,null],
       location:[null,null],
-      eventNo:['',Validators.required]
+      eventNo:['',Validators.required],
+      date:[null,null]
     })
     console.log(pId)
     this.service.getProductById(parseInt(pId))

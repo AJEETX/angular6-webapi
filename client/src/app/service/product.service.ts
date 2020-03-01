@@ -16,6 +16,7 @@ export class ProductService {
     return this.http.get<Product>(this.baseUrl+ '/' + pId)
   }
   addProduct(product:Product){
+    console.log(product)
     return this.http.post(this.baseUrl,product)
   }
   editProduct(product:Product){

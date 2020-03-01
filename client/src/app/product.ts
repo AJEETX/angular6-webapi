@@ -8,6 +8,7 @@ export class Product {
     location:string
     amountlost:number
     eventno:string
+    date:Date
 }
 export class User{
     Id:number

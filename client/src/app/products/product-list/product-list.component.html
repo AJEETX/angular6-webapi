@@ -34,24 +34,27 @@
       <thead>
         <tr>
           <!-- <th class="hidden">Id</th> -->
-          <th>Rego</th>
-          <!-- <th>Time</th> -->
+          <th (click)="sort('name')">Rego
+            <span class="glyphicon sort-icon" *ngIf="key =='name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+          </th>
+          
           <th>Event No</th>
           <th>Money</th>
           <th>Location</th>
-          <th>Comment</th>
+          <th>Date</th>
+          <th>Time</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products" [ngStyle]="setMyStyles(product)">
+        <tr *ngFor="let product of products" [ngStyle]="setMyStyles(product) | orderBy: key : reverse">
           <td style="display:none">{{product.pId}}</td>
           <td>{{product.name}}</td>
-          <!-- <td>{{product.time}}</td> -->
           <td>{{product.eventNo}}</td>
           <td>{{product.amountlost}}</td>
           <td>{{product.location}}</td>
-          <td>{{product.detail}}</td>
+          <td>{{product.date}}</td>
+          <td>{{product.time}}</td>
           <td>
             <i class="fa fa-pencil-square-o icon-size-edit" aria-hidden="true" (click)="editProduct(product)"></i>
             <i class="fa fa-trash-o left icon-size-delete" (click)="deleteProduct(product)" ></i>

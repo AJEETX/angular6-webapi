@@ -27,7 +27,6 @@ namespace WebApi.Services
         }
         public Product Add(Product product)
         {
-            product.Time = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss");
             product.PId=random.Next();
             _context.Products.InsertOne(product);
             return product;
@@ -79,6 +78,8 @@ namespace WebApi.Services
                 .Set(p => p.Location, productInfo.Location)
                 .Set(p => p.Watch, productInfo.Watch)
                 .Set(p => p.Detail, productInfo.Detail)
+                .Set(p => p.Date, productInfo.Date)
+                .Set(p => p.Time, productInfo.Time)
                 .Set(p => p.Amountlost, productInfo.Amountlost);      
                 var updateResult = _context.Products.UpdateOne(filter,update);
 

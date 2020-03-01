@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms'
 import { ProductService } from '../../service/product.service';
 import { Router } from '@angular/router';
+import { AmazingTimePickerService } from 'amazing-time-picker';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -13,7 +14,8 @@ export class AddProductComponent implements OnInit {
   message:string
   loading = false;
   error=''
-  constructor(private formBuilder:FormBuilder,private service:ProductService,private router:Router) {
+    public maxDate: Date = new Date ();
+  constructor(private formBuilder:FormBuilder,private service:ProductService,private router:Router,private atp: AmazingTimePickerService) {
     this.user=localStorage.getItem('user')
    }
 
@@ -23,10 +25,11 @@ export class AddProductComponent implements OnInit {
       name:['',Validators.required],
       watch:[true,null],
       detail:[null,null],
-      time:[null,null],
+      date:[null,null],
       amountlost:[null,null],
       location:[null,null],
-      eventno:['',Validators.required]
+      eventno:['',Validators.required],
+      time:[null,null]
     })
   }
   onSubmit(){
@@ -41,6 +44,12 @@ export class AddProductComponent implements OnInit {
         this.loading = false;
         this.router.navigate(['/login'])
       })
+  }
+  open(ev: any) {
+    const amazingTimePicker = this.atp.open();
+    amazingTimePicker.afterClose().subscribe(time => {
+      console.log(time);
+    });
   }
 back(){
   this.router.navigate([''])

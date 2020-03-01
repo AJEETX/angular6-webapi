@@ -20,6 +20,13 @@ export class ProductListComponent implements OnInit {
   searches: string[] = [];
   colordanger:'red'
   colornormal:'black'
+    //sorting
+    key: string = 'name'; //set default
+    reverse: boolean = false;
+    sort(key){
+      this.key = key;
+      this.reverse = !this.reverse;
+    }
   constructor(private router:Router, private service:ProductService) {
     if(localStorage.getItem('user'))
     this.user=localStorage.getItem('user')

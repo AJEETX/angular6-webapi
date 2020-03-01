@@ -19,7 +19,7 @@
       </style>
         <text x="80" y="15" class="heavy">edit</text>
       
-        <text x="100" y="15" class="Rrrrr">Drive Offs!</text>
+        <text x="100" y="15" class="Rrrrr">drive Offs!</text>
       </svg>
     <form [formGroup]="formEdit" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -35,10 +35,17 @@
     <input type="text" id="eventNo" formControlName="eventNo" class="form-control" placeholder="enter event no" name="eventNo" />
   </div>
     <div class="form-group">
-      <input type="text" id="location" formControlName="location" class="form-control" placeholder="enter location" name="location" />
+      <input type="text" id="amountlost" formControlName="amountlost" class="form-control" placeholder="enter money lost" name="amountlost" />
     </div>
     <div class="form-group">
-      <input type="text" id="amountlost" formControlName="amountlost" class="form-control" placeholder="enter money lost" name="amountlost" />
+      <input type="time" id="time" name="time" formControlName="time" atp-time-picker value="00:00" class="form-control" />
+    </div>
+    <div class="form-group">
+      <input type="date" id="date" name="date" class="form-control" formControlName="date" placeholder='Select a date' placeholder="dd-MMM-yyyy" max='maxDate'/>
+      <!-- <ejs-datepicker id="date" name="date" formControlName="date" placeholder='Select a date' format ='dd-MMM-yyyy' [max]='maxDate'></ejs-datepicker> -->
+    </div>
+    <div class="form-group">
+      <input type="text" id="location" formControlName="location" class="form-control" placeholder="enter location" name="location" />
     </div>
     <div class="form-group">
       <textarea type="text" id="detail" formControlName="detail" class="form-control" placeholder="enter details" name="detail"></textarea>
