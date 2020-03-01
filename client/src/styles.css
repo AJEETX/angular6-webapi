@@ -23,6 +23,7 @@ body{
 .farleft:hover{
     background-color: #007bff;
     color: white;
+    text-decoration: none;
 }
 table{
     border-radius: 8px;

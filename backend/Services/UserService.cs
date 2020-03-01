@@ -55,7 +55,7 @@ namespace WebApi.Services
             var user=default(User);
             if(string.IsNullOrWhiteSpace(id)) return user;
             try{
-                user= _context.Users.Find(u=>u.ID==GetInternalId(id) || u.Id==id )?.FirstOrDefault();
+                user= _context.Users.Find(u=>u.ID==GetInternalId(id) || u.UserId==id )?.FirstOrDefault();
             }
             catch (AppException)
             {

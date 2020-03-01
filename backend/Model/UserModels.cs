@@ -9,7 +9,7 @@ namespace WebApi.Model
         [BsonId]
         public ObjectId ID { get; set; }
         // external Id, easier to reference: 1,2,3 or A, B, C etc.
-        public string Id { get; set; }         
+        public string UserId { get; set; }         
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public List<Role> Roles {get;set;}
