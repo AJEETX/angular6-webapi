@@ -18,6 +18,7 @@ import { UserComponent } from './user/user/user.component';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     ReactiveFormsModule,
     AmazingTimePickerModule,
     DatePickerModule,
-    Ng2OrderModule 
+    Ng2OrderModule,
+    NgxPaginationModule 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

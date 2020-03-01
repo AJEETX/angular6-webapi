@@ -27,6 +27,8 @@ export class ProductListComponent implements OnInit {
       this.key = key;
       this.reverse = !this.reverse;
     }
+  p: number = 1;
+
   constructor(private router:Router, private service:ProductService) {
     if(localStorage.getItem('user'))
     this.user=localStorage.getItem('user')

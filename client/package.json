@@ -25,6 +25,7 @@
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
     "ng2-order-pipe": "^0.1.5",
+    "ngx-pagination": "^5.0.0",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },

@@ -47,7 +47,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products" [ngStyle]="setMyStyles(product) | orderBy: key : reverse">
+        <tr *ngFor="let product of products | orderBy: key : reverse | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" [ngStyle]="setMyStyles(product) ">
           <td style="display:none">{{product.pId}}</td>
           <td>{{product.name}}</td>
           <td>{{product.eventNo}}</td>
@@ -60,6 +60,7 @@
             <i class="fa fa-trash-o left icon-size-delete" (click)="deleteProduct(product)" ></i>
           </td>        
         </tbody>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </table>
       <div *ngIf="loading"><i class="fa fa-spinner"></i></div>  
     </div>
