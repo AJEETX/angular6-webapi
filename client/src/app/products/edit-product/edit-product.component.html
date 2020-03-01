@@ -28,20 +28,20 @@
       <div class="form-group">
       <input required formControlName="name" type="text" id="name" name="name" class="form-control" placeholder="update Vehicle registration number" />
     </div>
-    <div class="form-group">
-      <input formControlName="watch" type="checkbox" id="watch" placeholder="is special" name="watch" class="form-control"  />
-    </div>
-    <div class="form-group">
-      <input type="text" id="detail" formControlName="detail" name="detail" class="form-control" placeholder="enter detail" />
-    </div>
+    <div class="watch form-group">
+      <label id="danger">Drive Off:<input formControlName="watch" ng-true-value="'YES'" type="checkbox" id="watch" placeholder="is special" name="watch" class="form-control"  /></label>
+  </div>
+  <div class="form-group">
+    <input type="text" id="eventNo" formControlName="eventNo" class="form-control" placeholder="enter event no" name="eventNo" />
+  </div>
     <div class="form-group">
       <input type="text" id="location" formControlName="location" class="form-control" placeholder="enter location" name="location" />
     </div>
     <div class="form-group">
-      <input type="text" id="eventNo" formControlName="eventNo" class="form-control" placeholder="enter event no" name="eventNo" />
+      <input type="text" id="amountlost" formControlName="amountlost" class="form-control" placeholder="enter money lost" name="amountlost" />
     </div>
     <div class="form-group">
-      <input type="text" id="amountlost" formControlName="amountlost" class="form-control" placeholder="enter money lost" name="amountlost" />
+      <textarea type="text" id="detail" formControlName="detail" class="form-control" placeholder="enter details" name="detail"></textarea>
     </div>
     <div class="form-group">
       <button [disabled]="!formEdit.valid" class="btn btn-success"><i class="fa fa-edit right"></i>Update</button>

@@ -19,7 +19,7 @@ namespace WebApi.Model
     }
     public class ProductDto
     {
-        public string ID { get; set; }
+        public long PId { get; set; }
         public string Name { get; set; }
         public string Detail { get; set; }
         public bool Watch { get; set; }

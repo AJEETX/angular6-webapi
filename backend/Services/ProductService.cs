@@ -72,7 +72,16 @@ namespace WebApi.Services
         {
             try
             {
-                var updateResult = _context.Products.ReplaceOne(n => n.ID.Equals(productInfo.ID), productInfo, new ReplaceOptions { IsUpsert = true });
+                var filter = Builders<Product>.Filter.Eq(p => p.PId, productInfo.PId);
+                var update = Builders<Product>.Update
+                .Set(p => p.Name,productInfo.Name)
+                .Set(p => p.EventNo, productInfo.EventNo)
+                .Set(p => p.Location, productInfo.Location)
+                .Set(p => p.Watch, productInfo.Watch)
+                .Set(p => p.Detail, productInfo.Detail)
+                .Set(p => p.Amountlost, productInfo.Amountlost);      
+                var updateResult = _context.Products.UpdateOne(filter,update);
+
                 return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
             }
             catch (Exception)
