@@ -101,3 +101,6 @@ span{
     #danger{
         color: red;
     }
+    .search{
+        margin-top: 10px;
+    }

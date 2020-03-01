@@ -21,7 +21,7 @@ export class AddProductComponent implements OnInit {
     this.addForm=this.formBuilder.group({
       id:[Math.random().toString(36).substring(2, 15),null],
       name:['',Validators.required],
-      watch:[false,null],
+      watch:[true,null],
       detail:[null,null],
       time:[null,null],
       amountlost:[null,null],

@@ -17,7 +17,7 @@ export class AuthService {
           localStorage.setItem('username', user.username);
           localStorage.setItem('user', user.firstName+' '+user.lastName);
           localStorage.setItem('roles', user.roles);
-          localStorage.setItem('id', user.id);
+          localStorage.setItem('userId', user.id);
       }
       return user;
   },
@@ -35,7 +35,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
   getUserId(): string {
-    return localStorage.getItem('id');
+    return localStorage.getItem('userId');
   }  
   loggedIn(){
     return !!localStorage.getItem('token')

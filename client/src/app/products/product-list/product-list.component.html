@@ -13,21 +13,23 @@
       <div class="log">
         <a [routerLink]="['/login']" class="farleft" ><i class="fa fa-power-off right"></i>Logout</a>
       </div>
-        <svg viewBox="0 0 260 25" xmlns="http://www.w3.org/2000/svg">
-          <style>
-            .heavy { font: bold 10px sans-serif; }
-            .Rrrrr { font: italic 10px serif; fill: red; text-shadow: 1px 1px 1px grey;}
-          </style>
-          <text x="80" y="10" class="heavy">vehicle</text>
-          <text x="125" y="10" class="Rrrrr">list!</text>
-        </svg>
-<input type="search" class="form-control" placeholder="Please enter search term" [formControl]="searchField">
-<ul>
-  <li *ngFor="let search of searches">{{ search }}</li>
-</ul>
-<div class="alignleft">
-    <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-plus-square right"></i>Add vehicle detail</button>
+<div class="search">
+  <input type="search" class="form-control" placeholder="search ..." [formControl]="searchField">
+  <ul>
+    <li *ngFor="let search of searches">{{ search }}</li>
+  </ul>
+  <div class="alignleft">
+    <button class="btn btn-primary" (click)="addProduct()"><i class="fa fa-plus-square right"></i>Add Drive Off</button>
   </div>
+  <svg viewBox="0 0 260 25" xmlns="http://www.w3.org/2000/svg">
+    <style>
+      .heavy { font: bold 10px sans-serif; }
+      .Rrrrr { font: italic 10px serif; fill: red; text-shadow: 1px 1px 1px grey;}
+    </style>
+    <text x="90" y="10" class="heavy">Drive Off</text>
+    <text x="135" y="10" class="Rrrrr">Vehicles</text>
+  </svg>
+</div>
 <table class="table table-striped">
       <thead>
         <tr>

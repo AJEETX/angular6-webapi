@@ -20,16 +20,16 @@
         </style>
       
       
-        <text x="90" y="10" class="heavy">add</text>
+        <text x="95" y="10" class="heavy">add</text>
       
-        <text x="115" y="10" class="Rrrrr">vehicle details!</text>
+        <text x="115" y="10" class="Rrrrr">drive Offs</text>
       </svg>
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
     <input formControlName="name" type="text" id="name" placeholder="enter Vehicle registration number" name="name" class="form-control"  />
   </div>
   <div class="watch form-group">
-      <input formControlName="watch" type="checkbox" id="watch" placeholder="is special" name="watch" class="form-control"  /><span id="danger">Drive Off </span>
+    <label id="danger">Drive Off:<input formControlName="watch" type="checkbox" id="watch" placeholder="is special" name="watch" class="form-control"  /></label>
   </div>
   <div class="form-group">
     <input type="text" id="eventno" formControlName="eventno" class="form-control" placeholder="enter event no" name="eventno" />
