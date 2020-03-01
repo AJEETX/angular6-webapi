@@ -32,7 +32,6 @@ export class ProductListComponent implements OnInit {
     this.user=localStorage.getItem('user')
     this.service.getProducts()
     .subscribe(data=>{
-        console.log(data)
         this.products=data
     })
    }
@@ -57,9 +56,9 @@ export class ProductListComponent implements OnInit {
   }
   editProduct(product: Product): void {
     this.loading=true
-    localStorage.removeItem("id");
-    localStorage.setItem("id", product.pId.toString());
-    console.log( 'edit '+product)
+    localStorage.removeItem("pid");
+    console.log(product)
+    localStorage.setItem("pid", product.pId.toString());
     this.router.navigate(['edit-product']);
   };
   deleteProduct(product: Product): void {

@@ -106,9 +106,9 @@ span{
     .search{
         margin-top: 10px;
     }
-    #datepicker_input{
+    input#date_input{
         background-color: white;
-        font-size: 16px;
+        font-size: 1em;
         padding-bottom: 10px;
         padding-left: 10px;
         border: 1px solid #ced4da;

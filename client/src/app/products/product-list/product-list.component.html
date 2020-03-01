@@ -53,7 +53,7 @@
           <td>{{product.eventNo}}</td>
           <td>{{product.amountlost}}</td>
           <td>{{product.location}}</td>
-          <td>{{product.date}}</td>
+          <td>{{product.date | date : "dd-MMM-y"}}</td>
           <td>{{product.time}}</td>
           <td>
             <i class="fa fa-pencil-square-o icon-size-edit" aria-hidden="true" (click)="editProduct(product)"></i>

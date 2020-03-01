@@ -12,11 +12,13 @@ export class EditProductComponent implements OnInit {
 formEdit:FormGroup
 user:string
 loading=false
+public maxDate: Date = new Date ();
+
   constructor(private formBuilder:FormBuilder,private service:ProductService,private router:Router) { 
     this.user=localStorage.getItem('user')
   }
   ngOnInit() {
-    let pId= localStorage.getItem('id')
+    let pId= localStorage.getItem('pid')
     this.formEdit=this.formBuilder.group({
       pId:pId,
       id:[null,null],
@@ -29,7 +31,6 @@ loading=false
       eventNo:['',Validators.required],
       date:[null,null]
     })
-    console.log(pId)
     this.service.getProductById(parseInt(pId))
     .subscribe(data=>{
       this.formEdit.setValue(data)

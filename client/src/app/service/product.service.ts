@@ -12,15 +12,12 @@ export class ProductService {
   }
   getProductById(pId:number){
     localStorage.setItem('pid',pId.toString())
-    console.log('get by id='+pId)
     return this.http.get<Product>(this.baseUrl+ '/' + pId)
   }
   addProduct(product:Product){
-    console.log(product)
     return this.http.post(this.baseUrl,product)
   }
   editProduct(product:Product){
-    console.log(product)
     return this.http.put(this.baseUrl + '/' +product.id,product)
   }
   delete(pId: number) {

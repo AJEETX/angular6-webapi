@@ -7,3 +7,6 @@
 .hidden{
     display: none;
 }
+input#date_input{
+    background: white;
+}
