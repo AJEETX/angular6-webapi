@@ -27,9 +27,14 @@ namespace WebApi.Services
         }
         public Product Add(Product product)
         {
-            product.PId=random.Next();
-            _context.Products.InsertOne(product);
-            return product;
+            try{
+                product.PId=random.Next();
+                _context.Products.InsertOne(product);
+                return product;
+            }
+            catch(AppException){
+                return null;
+            }
         }
 
         public List<Product> Get(string q = "")
@@ -39,7 +44,7 @@ namespace WebApi.Services
             {
                 products= _context.Products.Find(u => u.Name.Contains(q) || u.Location.Contains(q) || u.EventNo.Contains(q) )?.ToList();
             }
-            catch (Exception)
+            catch (AppException)
             {
                 // log or manage the exception
             }
@@ -53,7 +58,7 @@ namespace WebApi.Services
             {
                 product= _context.Products.Find(p => p.PId == id)?.FirstOrDefault();
             }
-            catch (Exception)
+            catch (AppException)
             {
                 // log or manage the exception
             }
@@ -85,7 +90,7 @@ namespace WebApi.Services
 
                 return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
             }
-            catch (Exception)
+            catch (AppException)
             {
                 // log or manage the exception
                 return false;
@@ -99,7 +104,7 @@ namespace WebApi.Services
 
                 return actionResult.IsAcknowledged && actionResult.DeletedCount > 0;
             }
-            catch (Exception)
+            catch (AppException)
             {
                 // log or manage the exception
                 return false;

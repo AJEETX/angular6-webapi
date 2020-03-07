@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Helpers;
 using WebApi.Model;
 using WebApi.Services;
 
@@ -25,8 +27,14 @@ namespace WebApi.Controllers
         public IActionResult GetProducts(string q = "")
         {
             if (q == "undefined")  q = "";
-            var claims = User.Claims.Select(x => new {Type = x.Type, Value = x.Value});
-            var products = _productService.Get(q);
+            List<Product> products=default(List<Product>) ;
+            try{
+                var claims = User.Claims.Select(x => new {Type = x.Type, Value = x.Value});
+                products = _productService.Get(q);
+            }
+            catch(AppException){
+                
+            }
             return Ok(products);
         }
 
@@ -36,8 +44,14 @@ namespace WebApi.Controllers
         [ProducesResponseType(404)]
         public IActionResult GetProduct(long id)
         {
-            var product = _productService.GetById(id);
-            if (product == null) return NotFound();
+            Product product=default(Product);
+            try{
+                product = _productService.GetById(id);
+                if (product == null) return NotFound();
+            }
+            catch(AppException){
+
+            }
             return Ok(product);
         }
 
@@ -47,10 +61,15 @@ namespace WebApi.Controllers
         [ProducesResponseType(400)]
         public IActionResult PostProduct([FromBody][Required]ProductDto productDto)
         {
-            if (!ModelState.IsValid || productDto == null || string.IsNullOrEmpty(productDto.Name))
-                return BadRequest(ModelState);
-            var product=_mapper.Map<Product>(productDto);
-            _productService.Add(product);
+            if (!ModelState.IsValid || productDto == null || string.IsNullOrEmpty(productDto.Name)) return BadRequest(ModelState);
+            Product product=default(Product);
+            try{
+                product=_mapper.Map<Product>(productDto);
+                product=_productService.Add(product);
+            }
+            catch(AppException){
+
+            }
             return Ok(new {Product=product,StatusCode="Vehicle added"});
         }
 
@@ -58,16 +77,27 @@ namespace WebApi.Controllers
         public IActionResult PutProduct(string id, [FromBody]ProductDto productDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var product=_mapper.Map<Product>(productDto);
+            Product product=default(Product);
+            try{
+                product=_mapper.Map<Product>(productDto);
 
             if (!_productService.Update(product)) return NotFound();
+            }
+            catch(AppException) {
+
+            }
             return Ok(new { Status = "Vehicle updated" });
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct(long id)
         {
-            if (!_productService.Delete(id)) return BadRequest();
+            try{
+                if (!_productService.Delete(id)) return BadRequest();
+            }
+            catch(AppException){
+
+            }
             return Ok(new { Status = "Vehicle deleted" });
         }
     }
